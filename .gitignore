@@ -1,0 +1,5 @@
+src/main/webapp/VAADIN/widgetsets/
+spreadsheet-charts-conf/
+hs_err*
+target/
+nb-configuration.xml

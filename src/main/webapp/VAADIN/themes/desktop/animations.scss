@@ -1,0 +1,79 @@
+@mixin doTransition($t) {
+    $prefixes: -moz-, -webkit-, -ms-, -o-, "";
+    @each $pref in $prefixes {
+        #{$pref}transition: $t;
+    }
+}
+
+@mixin fadeOut {
+    -webkit-opacity: 0.3;
+    -moz-opacity: 0.3;
+    opacity: 0.3;    
+    @include doTransition(opacity 1s ease-in-out 1s);
+}
+
+@mixin fadeIn {
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+    opacity: 1;    
+    @include doTransition(opacity 0.15s ease-in-out 0.15s);
+}
+
+@mixin fadeOutAll {
+    -webkit-opacity: 0;
+    -moz-opacity: 0;
+    opacity: 0;    
+    @include doTransition(opacity 2s ease-in-out 2s);
+}
+
+@mixin doAnimation($name, $duration, $ease, $delay, $direction) {
+    -webkit-animation: $name $duration $ease $delay $direction;
+    -moz-animation: $name $duration $ease $delay $direction;
+    -o-animation: $name $duration $ease $delay $direction;
+    -ms-animation: $name $duration $ease $delay $direction;
+    animation: $name $duration $ease $delay $direction;
+}
+
+@mixin fadeInAppear {
+    @include doAnimation(fadein, 1s, ease-in-out, 0s, normal);
+}
+
+@-webkit-keyframes fadein {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-moz-keyframes fadein {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-o-keyframes fadein {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-ms-keyframes fadein {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes fadein {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+body.useractive .fadable:hover {
+    @include fadeIn;
+}
+
+body.useractive .fadable {
+    @include fadeOut;
+}
+
+body.userinactive .fadable {
+    @include fadeOutAll;
+}
+
+body.userinactive .highcharts-axis-labels,
+body.userinactive .highcharts-data-labels,
+body.userinactive .highcharts-grid,
+body.userinactive path[fill="none"] {
+    
+}

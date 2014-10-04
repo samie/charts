@@ -1,0 +1,185 @@
+$v-app-loading-text: "Charts Valo";
+
+$v-font-family: "Helvetica W01 Light", sans-serif;
+$v-font-size: 12px;
+$v-layout-margin-top: 10px; 
+$v-layout-margin-right: 10px; 
+$v-layout-margin-bottom: 20px; 
+$v-layout-margin-left: 10px;
+$v-font-weight: 400;
+$v-font-weight--header: 400;
+$v-background-color: #fff;
+$v-focus-color: rgb(37, 144, 194);
+$v-luminance-threshold: 180;
+$v-border: 1px solid v-shade;
+$v-border-radius: 4px;
+$v-bevel: false;
+$v-gradient: false;
+$v-shadow: false;
+$v-textfield-bevel: false;
+$v-textfield-shadow: false;
+$v-link-text-decoration: false;
+$v-selection-overlay-padding-horizontal: 0;
+$v-selection-overlay-padding-vertical: 4px;
+$v-selection-item-height: 25px;
+$v-selection-color: rgb(37, 144, 194);
+$v-selection-item-border-radius: 0;
+
+
+$font-family-big: "HelveticaW01-RoundedBd", sans-serif;
+
+$v-friendly-color: rgba(230, 30, 110, 0.9);
+$v-friendly-background: #fff;
+
+/* Vaadin colors */
+$color-vaadin-blue: #00b4f0;
+$color-vaadin-green: #40b527;
+$color-vaadin-orange: #ee7c08;
+$color-vaadin-red: #e61e6e;
+$color-vaadin-beige: #c8c7b5;
+$color-vaadin-black: #000;
+$color-vaadin-white: #fff;
+
+@import "../valo/valo.scss";
+@import "addons.scss";
+@import "animations.scss";
+
+.desktop {
+
+    @include valo;
+
+    .authoringbar {
+        background: $color-vaadin-black;
+
+        .v-link { 
+            display: block;
+        }
+    }
+
+    .v-button {
+        margin-top:1px;
+        margin-left:2px;
+        margin-right:2px;
+        margin-bottom:1px;
+        font-size: $v-font-size;
+    }
+
+    .v-button.selected {
+        background: $v-selection-color;
+        border-color: $v-focus-color;
+        color: $v-background-color;
+    }
+
+
+    /* Data select button customization */
+    .dataselect {
+        text-align: center;
+        width: 100%;
+
+        .v-button {
+            background: $v-background-color;
+            border-color: $v-focus-color;
+            color: $v-focus-color;
+        }
+
+        .v-button.selected {
+            background: $v-focus-color;
+            color: $color-vaadin-white;
+        }
+    }
+
+    /* Filter button customization */
+    .filters {
+        text-align: right;
+        margin-bottom: 4px;
+        width: 100%;
+
+        .v-button {
+            background: $color-vaadin-white;
+            border-color: $color-vaadin-red;
+            color: $color-vaadin-red;
+        }
+        .v-button.selected {
+            background: $color-vaadin-red;
+            color: $color-vaadin-white;
+        }
+
+    }
+
+
+    /* Type select button customization */
+    .types {
+        text-align: right;
+        z-index: 101; 
+
+        .v-button {
+            font-size: $v-font-size - 2px;
+            border-color: $color-vaadin-beige;
+            color: $color-vaadin-beige;
+        }
+        .v-button.selected {
+            background: $color-vaadin-beige; 
+            color: $v-background-color;
+        }
+
+    }
+
+    .big-title.v-label {
+        line-height: 1.05em;
+        overflow: visible;
+        z-index: 103; 
+        white-space: normal;
+        text-align: right;
+        vertical-align: bottom;
+        background-color: transparent;     
+
+        @include fadeInAppear;
+
+        b {
+            font-family: $font-family-big;
+            color: $color-vaadin-blue;
+        }
+
+        .filter-text {
+            font-size: 0.4em;
+            line-height: 1.10em;
+            color: $color-vaadin-red;
+            white-space: normal;
+            text-align: right;
+            margin-bottom: 0.6em;
+
+            span.value {
+                font-family: $font-family-big;
+            }
+        }
+    }
+
+    .types {
+        text-align: right;
+        z-index: 102; 
+        background: white;
+    }
+    .credits {
+        @include fadeIn;
+
+        z-index: 102; 
+        color: #aaa;
+        background: white;
+    }
+
+    /* Valo fix for: http://dev.vaadin.com/ticket/14225 */
+    textarea.v-textarea {
+        white-space: pre;
+    }
+
+    .font-scale {
+        overflow: visible;
+    }
+
+
+    .v-link.external {
+        font-family: $font-family-big;
+        color: $color-vaadin-blue;        
+        font-size: 1.2em;
+    }
+}

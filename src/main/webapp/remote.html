@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <title>Remote Vaadin charts with CORS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Add withCredentials to Vaadin requests to allow session cookies. Note: this affects to all XHRs on this page. -->
+        <script>
+            XMLHttpRequest.prototype._originalSend = XMLHttpRequest.prototype.send;
+            var sendWithCredentials = function(data) {
+                this.withCredentials = true;
+                this._originalSend(data);
+            };
+            XMLHttpRequest.prototype.send = sendWithCredentials;
+        </script>
+        <style type="text/css">
+        body {
+          font-family: Arial;
+          font-size: 14px;
+          background: #f0f0f0;
+        }
+        #chart1, #chart2 {
+            margin: auto; 
+            width:800px;
+            height:270px;
+            border: 1px solid gray;
+            box-shadow: 2px 2px 20px gray;
+        }
+        .link {
+            margin: auto; 
+            width:800px;
+            font-size: 14px;
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+        .link a { 
+          color: 0a0a0a;
+          text-decoration: none;
+        }
+
+        .intro {
+            margin: auto; 
+            width:800px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="intro">This is a Vaadin <a href="http://www.w3.org/TR/cors/">CORS</a> sample HTML file. Charts here are running remotely from a Vaadin application at <a href="http://charts.app.fi/sami/vaadin-community-survey-june-2014">charts.app.fi</a>. 
+        </div>
+        
+        <script 
+        type="text/javascript"
+        src="http://charts.app.fi/VAADIN/vaadinBootstrap.js">
+        </script>
+
+        <iframe tabindex="-1" id="__gwt_historyFrame"
+                style="position: absolute; width: 0; height: 0;
+                border: 0; overflow: hidden"
+                src="javascript:false"></iframe>
+
+        <!-- Placeholder for chart 1 -->
+        <div style="" id="chart1" class="v-app embedded">
+            <div class="v-app-loading"></div>
+        </div>        
+        <div class="link"><a href="http://charts.app.fi/sami/vaadin-community-survey-june-2014#1">View the full chart »</a></div>
+
+
+        <!-- Placeholder for chart 2 -->
+        <div id="chart2" class="v-app embedded">
+            <div class="v-app-loading"></div>
+        </div>        
+        <div class="link"><a href="http://charts.app.fi/sami/vaadin-community-survey-june-2014#2">View the full chart »</a></div>
+
+        <script type="text/javascript">
+            if (!window.vaadin) alert("Failed to load the Vaadin bootstrap");
+
+            /* Chart 1 */
+            vaadin.initApplication("chart1", {
+                "browserDetailsUrl": "http://charts.app.fi/",
+                "serviceUrl": "http://charts.app.fi/",
+                "widgetset": "fi.app.charts.gwt.DesktopWidgetSet",
+                "theme": "desktop",
+                "versionInfo": {"vaadinVersion": "7.3.0.beta1"},
+                "vaadinDir": "http://charts.app.fi/VAADIN/",
+                "heartbeatInterval": 300,
+                "debug": true,
+                "standalone": false,
+                "extraParams": "&singlechart=sami/vaadin-community-survey-june-2014/1",
+                "authErrMsg": {
+                    "message": "Take note of any unsaved data, " +
+                            "and <u>click here<\/u> to continue.",
+                    "caption": "Authentication problem"
+                },
+                "comErrMsg": {
+                    "message": "Take note of any unsaved data, " +
+                            "and <u>click here<\/u> to continue.",
+                    "caption": "Communication problem"
+                },
+                "sessExpMsg": {
+                    "message": "Take note of any unsaved data, " +
+                            "and <u>click here<\/u> to continue.",
+                    "caption": "Session Expired"
+                }
+            });
+
+            /* Chart 2 */
+            vaadin.initApplication("chart2", {
+                "browserDetailsUrl": "http://charts.app.fi/",
+                "serviceUrl": "http://charts.app.fi/",
+                "widgetset": "fi.app.charts.gwt.DesktopWidgetSet",
+                "theme": "desktop",
+                "versionInfo": {"vaadinVersion": "7.3.0.beta1"},
+                "vaadinDir": "http://charts.app.fi/VAADIN/",
+                "heartbeatInterval": 300,
+                "debug": true,
+                "standalone": false,
+                "extraParams": "&singlechart=sami/vaadin-community-survey-june-2014/2",
+                "authErrMsg": {
+                    "message": "Take note of any unsaved data, " +
+                            "and <u>click here<\/u> to continue.",
+                    "caption": "Authentication problem"
+                },
+                "comErrMsg": {
+                    "message": "Take note of any unsaved data, " +
+                            "and <u>click here<\/u> to continue.",
+                    "caption": "Communication problem"
+                },
+                "sessExpMsg": {
+                    "message": "Take note of any unsaved data, " +
+                            "and <u>click here<\/u> to continue.",
+                    "caption": "Session Expired"
+                }
+            });
+        </script>
+    </body>
+</html>
