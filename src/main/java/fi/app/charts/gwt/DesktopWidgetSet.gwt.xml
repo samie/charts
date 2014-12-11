@@ -6,8 +6,6 @@
 
     <inherits name="com.vaadin.addon.charts.Widgetset" />
 
-    <inherits name="com.vaadin.addon.timeline.gwt.TimelineWidgetSet" />
-
     <generate-with class="fi.app.charts.OptimizedConnectorBundleLoaderFactory">
         <when-type-assignable class="com.vaadin.client.metadata.ConnectorBundleLoader" />
     </generate-with>
