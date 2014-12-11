@@ -187,7 +187,7 @@ public class SpreadsheetSettings extends ApplicationProperties {
         for (int i = 0; i < s.colCount(); i++) {
             settings.setProperty("col_" + String.format("%03d", i) + "_" + KEY_TYPES, listAllTypes());
             settings.setProperty("col_" + String.format("%03d", i) + "_" + KEY_TITLE, s.getColName(i));
-            settings.setProperty("col_" + String.format("%03d", i) + "_" + KEY_SORT, SortBy.VALUE.name() + "," + SortDirection.ASC.name());
+            settings.setProperty("col_" + String.format("%03d", i) + "_" + KEY_SORT, SortBy.VALUE.name() + "," + SortDirection.DESC.name());
         }
     }
 
