@@ -50,7 +50,7 @@ public class SpreadsheetFilters {
             if (!isActive()) {
                 return true;
             }
-            String value = spreadsheet.getStringValue(row, column);
+            String value = spreadsheet.getStringValue(row, column, SpreadSheet.NULL_STRING);
             return match(value);
         }
 

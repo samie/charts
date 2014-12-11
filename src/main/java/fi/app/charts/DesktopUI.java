@@ -154,8 +154,9 @@ public class DesktopUI extends UI implements AuthorizationListener {
 
             @Override
             public ConfirmDialog create(final String caption, final String message,
-                    final String okCaption, final String cancelCaption) {
-                ConfirmDialog d = super.create(caption, message, okCaption, cancelCaption);
+            final String okCaption, final String cancelCaption,
+            final String notOkCaption) {
+                ConfirmDialog d = super.create(caption, message, okCaption, cancelCaption, notOkCaption);
                 d.getOkButton().setStyleName("lst");
                 d.getOkButton().addStyleName("selected");
                 d.getCancelButton().setStyleName("lst");

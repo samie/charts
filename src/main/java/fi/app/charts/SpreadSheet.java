@@ -33,8 +33,11 @@ public class SpreadSheet implements Serializable {
     private String documentKey;
 
     enum ColType {
+
         NUMERIC, STRING, TIMESTAMP, MULTISELECT
     }
+
+    public static final String NULL_STRING = "(no answer)";
 
     private SpreadSheet() {
     }
@@ -101,9 +104,9 @@ public class SpreadSheet implements Serializable {
         return realRowCount;
     }
 
-    String getStringValue(int row, int col) {
+    String getStringValue(int row, int col, String nullString) {
         Object v = dataFields[row][col];
-        return v != null ? v.toString() : null;
+        return v != null ? v.toString() : nullString;
     }
 
     String getTitle() {
@@ -136,6 +139,7 @@ public class SpreadSheet implements Serializable {
      * Count aggregate
      */
     List<AggregateValue> aggretageGroups(int col, SpreadsheetFilters filters) {
+
         Map<String, Integer> map = new HashMap<String, Integer>();
         int totalCount = 0;
         for (int i = 0; i < rowCount(); i++) {
@@ -147,10 +151,10 @@ public class SpreadSheet implements Serializable {
 
             String key = null;
             if (isTimestampColumn(col)) {
-                key = "" + getStringValue(i, col).split(" ")[0];
+                key = "" + getStringValue(i, col, NULL_STRING).split(" ")[0];
 
             } else {
-                key = (""+getStringValue(i, col)).trim();
+                key = ("" + getStringValue(i, col, NULL_STRING)).trim();
             }
 
             Number v = map.get(key);
@@ -160,14 +164,14 @@ public class SpreadSheet implements Serializable {
         }
         List<AggregateValue> res = new ArrayList<AggregateValue>();
         for (String t : map.keySet()) {
-            res.add(new AggregateValue(t, map.get(t), ((double)map.get(t))/(double)totalCount*100d));
+            res.add(new AggregateValue(t, map.get(t), ((double) map.get(t)) / (double) totalCount * 100d));
         }
         return res;
     }
 
     List<AggregateValue> aggretageMultiselectGroups(int col, SpreadsheetFilters filters) {
         Map<String, Integer> map = new HashMap<String, Integer>();
-        
+
         int totalCount = 0;
         for (int i = 0; i < rowCount(); i++) {
 
@@ -175,8 +179,8 @@ public class SpreadSheet implements Serializable {
             if (!filters.filterMatch(i)) {
                 continue;
             }
-            
-            String selection = (""+getStringValue(i, col)).trim();
+
+            String selection = ("" + getStringValue(i, col, NULL_STRING)).trim();
             String[] keys = selection.split(",");
             for (String key : keys) {
                 key = key.trim();
@@ -188,7 +192,7 @@ public class SpreadSheet implements Serializable {
         }
         List<AggregateValue> res = new ArrayList<AggregateValue>();
         for (String t : map.keySet()) {
-            res.add(new AggregateValue(t, map.get(t), ((double)map.get(t))/(double)totalCount*100d));
+            res.add(new AggregateValue(t, map.get(t), ((double) map.get(t)) / (double) totalCount * 100d));
         }
         return res;
     }
@@ -230,7 +234,7 @@ public class SpreadSheet implements Serializable {
             CellFeed cellFeed = service.getFeed(cellFeedUrl, CellFeed.class);
 
             // Init Spreadsheet object
-            SpreadSheet s = new SpreadSheet(documentKey,wsFeed.getTitle().getPlainText());
+            SpreadSheet s = new SpreadSheet(documentKey, wsFeed.getTitle().getPlainText());
             s.colHeaders = new String[cellFeed.getColCount()];
             s.colTypes = new SpreadSheet.ColType[cellFeed.getColCount()];
             s.dataFields = new Object[cellFeed.getRowCount()][cellFeed.getColCount()];
